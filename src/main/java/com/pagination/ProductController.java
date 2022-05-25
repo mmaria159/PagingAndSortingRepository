@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
@@ -22,6 +24,11 @@ public class ProductController {
             @RequestParam(value = "sortDirection", defaultValue = "ASC") Sort.Direction sortDirection
     ) {
         return productService.findAll(getPageRequest(page, size, sortCriterion, sortDirection));
+    }
+
+    @GetMapping("/search")
+    public List<Product> search(@RequestParam(value = "search") String search) {
+        return productService.search(search);
     }
 
     private PageRequest getPageRequest(int page, int size, String sortCriterion, Sort.Direction sortDirection) {

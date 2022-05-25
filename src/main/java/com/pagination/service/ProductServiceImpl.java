@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -14,5 +16,10 @@ public class ProductServiceImpl implements ProductService {
 
     public Page<Product> findAll(PageRequest pageRequest) {
         return productRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public List<Product> search(String search) {
+        return productRepository.search(search);
     }
 }
